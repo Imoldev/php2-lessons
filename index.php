@@ -1,11 +1,15 @@
 <?php
+require_once __DIR__ . '/autoload.php';
 
-use Models\Product;
-use Models\User;
+use Models\Article;
 
-spl_autoload_register(function ($class) {
-    require __DIR__ . '/' . str_replace('\\', '/', $class) . '.php';
-});
+$numberItems = 3;
+$page = 1;
+
+$newsList = Article::findLast($numberItems, $page);
+
+include __DIR__ . '/templates/news-list.tpl.php';
+
 
 
 
