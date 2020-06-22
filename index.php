@@ -8,6 +8,7 @@ $page = 1;
 
 $newsList = Article::findLast($numberItems, $page);
 
+
 include __DIR__ . '/templates/news-list.tpl.php';
 
 

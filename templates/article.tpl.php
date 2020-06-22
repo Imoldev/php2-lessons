@@ -1,3 +1,9 @@
+<?php
+use Models\Article;
+
+/** @var $article Article */
+?>
+
 <h2>
     <?= $article->title; ?>
 </h2>

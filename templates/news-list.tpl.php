@@ -1,3 +1,9 @@
+<?php
+use Models\Article;
+
+/** @var $newsList Article[] */
+?>
+
 <ul>
     <?php foreach ($newsList as $item): ?>
     <li>

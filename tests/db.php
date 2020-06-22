@@ -1,11 +1,12 @@
 <?php
 require_once __DIR__ . '/../Db.php';
+require_once __DIR__ . '/../App/Config.php';
 
-$db = new Db();
+$db =  Db::instance();
 
 $paramsInsert = [
     'charField' => date('H:i:s'),
-    'intField'=> 11111
+    'intField'=> 22222
 ];
 
 $insert = 'INSERT INTO test_db (char_field, int_field) VALUES (:charField, :intField)';

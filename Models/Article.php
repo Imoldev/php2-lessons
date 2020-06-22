@@ -1,6 +1,7 @@
 <?php
 
 namespace Models;
+use Db;
 
 class Article extends \Model
 {
@@ -16,7 +17,7 @@ class Article extends \Model
 
     public static function findLast (int $numberItems, int $page) {
         $offset = $numberItems * ($page - 1);
-        $db = self::getDb();
+        $db = Db::instance();
         $sql = 'SELECT * FROM ' . static::TABLE . ' ORDER BY date DESC ' .
                ' LIMIT ' . $numberItems . ' OFFSET ' . $offset ;
         return $db->query($sql, static::class);

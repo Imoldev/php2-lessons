@@ -7,18 +7,23 @@ abstract class Model
 
     public int $id;
 
-    protected static $db = null;
-
+    /**
+     * @return static[]
+     */
     public static function findAll(): array
     {
-        $db = self::getDb();
+        $db = Db::instance();
         $sql = 'SELECT * FROM ' . static::TABLE;
         return $db->query($sql, static::class);
     }
 
+    /**
+     * @param $id
+     * @return bool|static
+     */
     public static function findById($id)
     {
-        $db = self::getDb();
+        $db = Db::instance();
         $sql = 'SELECT * FROM ' . static::TABLE . ' WHERE id = ?';
         $result = $db->query($sql, static::class, [$id]);
         if (empty($result)) {
@@ -27,12 +32,56 @@ abstract class Model
         return $result[0];
     }
 
-    protected static function getDb(): Db
+    public function save()
     {
-        if (is_null(self::$db)) {
-            self::$db = new \Db();
+        if (!isset($this->id)) {
+            $this->insert();
+            return;
         }
-        return self::$db;
+        $this->update();
     }
 
+    public function delete() {
+        $sql = 'DELETE FROM ' . static::TABLE . ' WHERE id = ' . $this->id;
+        $db = Db::instance();
+        $db->execute($sql);
+    }
+
+    protected function insert()
+    {
+        $props = get_object_vars($this);
+
+        $columns = [];
+        $binds = [];
+        $data = [];
+        foreach ($props as $name => $value) {
+            $columns[] = $name;
+            $binds[] = ':' . $name;
+            $data[':' . $name] = $value;
+        }
+
+        $sql = 'INSERT INTO ' . static::TABLE . ' 
+        (' . implode(',', $columns) . ') 
+        VALUES (' . implode(',', $binds) . ' )';
+
+        $db = Db::instance();
+        $res = $db->execute($sql, $data);
+        if (true === $res) {
+            $this->id = $db->lastId();
+        }
+    }
+
+    protected function update() {
+        $props = get_object_vars($this);
+
+        $set = [];
+        foreach ($props as $name => $value) {
+            if ('id' !== $name) {
+                $set[] = $name . '=:' . $name;
+            }
+        }
+        $sql = 'UPDATE ' . static::TABLE . ' SET ' . implode(',', $set) . ' WHERE id=:id';
+        $db = Db::instance();
+        $db->execute($sql, $props);
+    }
 }
