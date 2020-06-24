@@ -22,12 +22,8 @@ class Db
         $config = Config::instance();
         $dbData = $config->data['db'];
 
-        $host = $dbData['host'];
-        $dbname = $dbData['dbname'];
-        $username = $dbData['username'];
-        $password = $dbData['password'];
-
-        $this->dbh = new \PDO('pgsql:host=' . $host . ';dbname=' . $dbname, $username, $password);
+        $this->dbh = new \PDO('pgsql:host=' . $dbData['host'] . ';dbname=' . $dbData['dbname'],
+            $dbData['username'], $dbData['password']);
     }
 
     public function query($sql, $class, $params = []): array
