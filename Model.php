@@ -32,6 +32,14 @@ abstract class Model
         return $result[0];
     }
 
+    public static function findLast (int $numberItems, int $page) {
+        $offset = $numberItems * ($page - 1);
+        $db = self::getDb();
+        $sql = 'SELECT * FROM ' . static::TABLE . ' ORDER BY date DESC ' .
+            ' LIMIT ' . $numberItems . ' OFFSET ' . $offset ;
+        return $db->query($sql, static::class);
+    }
+
     public function save()
     {
         if (!isset($this->id)) {
