@@ -14,9 +14,9 @@ switch ($action) {
 
     case 'save':
         $article = new Article();
-        $article->title = trim($_POST['title']);
-        $article->preview = trim($_POST['preview']);
-        $article->content = trim($_POST['content']);
+        $article->title = $_POST['title'];
+        $article->preview = $_POST['preview'];
+        $article->content = $_POST['content'];
 
         $article->save();
         header ('Location: /admin.php');
@@ -35,9 +35,9 @@ switch ($action) {
         $id = $_POST['id'];
         $article = Article::findById($id);
 
-        $article->title = trim($_POST['title']);
-        $article->preview = trim($_POST['preview']);
-        $article->content = trim($_POST['content']);
+        $article->title = $_POST['title'];
+        $article->preview = $_POST['preview'];
+        $article->content = $_POST['content'];
 
         $article->save();
         header ('Location: /admin.php');

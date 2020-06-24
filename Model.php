@@ -13,7 +13,7 @@ abstract class Model
     public static function findAll(): array
     {
         $db = Db::instance();
-        $sql = 'SELECT * FROM ' . static::TABLE;
+        $sql = 'SELECT * FROM ' . static::TABLE . ' ORDER BY id DESC';
         return $db->query($sql, static::class);
     }
 
@@ -23,9 +23,13 @@ abstract class Model
      */
     public static function findById($id)
     {
+        $params = [
+            'id' => $id
+        ];
+
         $db = Db::instance();
-        $sql = 'SELECT * FROM ' . static::TABLE . ' WHERE id = ?';
-        $result = $db->query($sql, static::class, [$id]);
+        $sql = 'SELECT * FROM ' . static::TABLE . ' WHERE id = :id';
+        $result = $db->query($sql, static::class, $params);
         if (empty($result)) {
             return false;
         }
@@ -34,7 +38,7 @@ abstract class Model
 
     public static function findLast (int $numberItems, int $page) {
         $offset = $numberItems * ($page - 1);
-        $db = self::getDb();
+        $db = Db::instance();
         $sql = 'SELECT * FROM ' . static::TABLE . ' ORDER BY date DESC ' .
             ' LIMIT ' . $numberItems . ' OFFSET ' . $offset ;
         return $db->query($sql, static::class);
