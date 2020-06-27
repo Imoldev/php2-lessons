@@ -1,14 +1,13 @@
 <?php
 use Models\Article;
 
-/** @var $newsList Article[] */
 /** @var $article Article */
 
 ?>
 
 <form action="" method="post">
     <input type="hidden" name="action" value="<?= $forward; ?>">
-    <input type="hidden" name="id" value="<?= $id ?? ''; ?>">
+    <input type="hidden" name="id" value="<?= $article->id ?? ''; ?>">
     <label for="title">Заголовок</label>
     <br>
     <input id="title" type="text" name="title" value="<?= isset($article) ? $article->title : ''; ?>">
@@ -22,19 +21,7 @@ use Models\Article;
     <textarea name="content" id="content" cols="60" rows="10"><?= isset($article) ? $article->content : ''; ?></textarea>
     <br><br>
     <button type="submit">Отправить</button>
-    <a href="/admin.php?action=clear">Сбросить</a>
+    <?php if (isset($article)): ?>
+    <a href="/admin/?action=edit&id=<?php echo $article->id ?>">Сбросить</a>
+    <?php endif; ?>
 </form>
-<ul>
-    <?php foreach ($newsList as $item): ?>
-    <li>
-        <h3><?= $item->title; ?></h3>
-        <div> <?= $item->date; ?> </div>
-        <p><i> <?= $item->preview; ?> </i></p>
-        <p> <?= $item->content ?> </p>
-        <a href="/admin.php?action=edit&id=<?= $item->id ?>">Редактировать</a>
-        <a href="/admin.php?action=delete&id=<?= $item->id ?>">Удалить</a>
-        <hr>
-    </li>
-    <?php  endforeach; ?>
-</ul>
-

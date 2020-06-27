@@ -6,7 +6,7 @@ namespace App;
 
 class Config
 {
-    protected const CONFIG_FILE = '/config/config.php';
+    protected const CONFIG_FILE = __DIR__. '/../config/config.php';
 
     public $data;
 
@@ -22,7 +22,7 @@ class Config
 
     protected function __construct()
     {
-        $this->data = require __DIR__. '/..' . self::CONFIG_FILE;
+        $this->data = require  self::CONFIG_FILE;
     }
 
 }

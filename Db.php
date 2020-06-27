@@ -37,9 +37,6 @@ class Db
     {
         $sth = $this->dbh->prepare($query);
 
-        $arr = $sth->errorInfo();
-        print_r($arr);
-
         return $sth->execute($params);
     }
 
