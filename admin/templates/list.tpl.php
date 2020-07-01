@@ -2,7 +2,8 @@
 
 use Models\Article;
 
-/** @var $newsList Article[] */
+/** @var Article[] $newsList */
+$newsList = $this->articles;
 
 ?>
 
@@ -13,9 +14,12 @@ use Models\Article;
             <div> <?= $item->date; ?> </div>
             <p><i> <?= $item->preview; ?> </i></p>
             <p> <?= $item->content ?> </p>
+            <?php if (!is_null($item->author)): ?>
+                <p><i><?php echo $item->author->pseudonym; ?></i></p>
+            <?php endif; ?>
             <a href="/admin/?action=edit&id=<?= $item->id ?>">Редактировать</a>
             <a href="/admin/?action=delete&id=<?= $item->id ?>">Удалить</a>
             <hr>
         </li>
-    <?php  endforeach; ?>
+    <?php endforeach; ?>
 </ul>

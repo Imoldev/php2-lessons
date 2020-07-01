@@ -2,19 +2,23 @@
 use Models\Article;
 
 /** @var $article Article */
+$article = $this->article;
 ?>
 
 <h2>
-    <?= $article->title; ?>
+    <?php echo $article->title; ?>
 </h2>
 <div>
-    <?= $article->date; ?>
+    <?php echo $article->date; ?>
 </div>
 <hr>
 <p>
-    <i><?= $article->preview; ?></i>
+    <i><?php echo $article->preview; ?></i>
 </p>
 <p>
-    <?= $article->content; ?>
+    <?php echo $article->content; ?>
 </p>
+<?php if(!is_null($article->author)): ?>
+    <p><i> <?php echo $article->author->pseudonym; ?> </i></p>
+<?php endif; ?>
 <a href="/admin">К списку новостей</a>

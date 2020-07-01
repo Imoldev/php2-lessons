@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 require_once __DIR__ . '/autoload.php';
 
 use Models\Article;
@@ -13,6 +15,10 @@ if( false === $article) {
     exit();
 }
 
-include __DIR__ . '/templates/article.tpl.php';
+$view = new View();
+$view->article = $article;
+
+$view->display( __DIR__ . '/templates/article.tpl.php');
+
 
 

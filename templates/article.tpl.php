@@ -1,17 +1,22 @@
 <?php
 use Models\Article;
 
-/** @var $article Article */
+/** @var Article $article */
+$article = $this->article;
 ?>
-
 <h2>
-    <?= $article->title; ?>
+    <?php echo $article->title; ?>
 </h2>
 <div>
-    <?= $article->date; ?>
+    <?php echo $article->date; ?>
 </div>
 <hr>
 <p>
-    <?= $article->content; ?>
+    <?php echo $article->content; ?>
+</p>
+<p>
+    <?php if (!is_null($article->author)): ?>
+        <i><?php echo $article->author->pseudonym; ?></i>
+    <?php endif; ?>
 </p>
 <a href="/index.php">К списку новостей</a>

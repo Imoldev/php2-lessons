@@ -3,8 +3,17 @@ require __DIR__ . '/autoload.php';
 
 use Models\Article;
 
-$forward = 'update';
-$article = Article::findById($id);
+$view = new View();
+$view->article = Article::findById($id);
 
-include __DIR__ . '/../templates/form.tpl.php';
-include __DIR__ . '/../templates/article.tpl.php';
+if ( false === $view->article) {
+    include __DIR__ . '/action_404.php';
+    exit();
+}
+
+$view->forward = 'update';
+
+$view->display(__DIR__ . '/../templates/form.tpl.php');
+$view->display(__DIR__ . '/../templates/article.tpl.php');
+
+

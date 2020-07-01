@@ -11,3 +11,4 @@ $article->content = $_POST['content'];
 
 $article->save();
 header ('Location: /admin/?action=edit&id=' . $article->id);
+exit();

@@ -36,10 +36,15 @@ abstract class Model
         return $result[0];
     }
 
+    /**
+     * @param int $numberItems
+     * @param int $page
+     * @return static[]
+     */
     public static function findLast (int $numberItems, int $page) {
         $offset = $numberItems * ($page - 1);
         $db = Db::instance();
-        $sql = 'SELECT * FROM ' . static::TABLE . ' ORDER BY date DESC ' .
+        $sql = 'SELECT * FROM ' . static::TABLE . ' ORDER BY id DESC ' .
             ' LIMIT ' . $numberItems . ' OFFSET ' . $offset ;
         return $db->query($sql, static::class);
     }
