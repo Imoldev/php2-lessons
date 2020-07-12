@@ -14,5 +14,14 @@ services:
     ports:
       - 5432:5432
 
+  web:
+    build: ./docker/apache
+    ports:
+      - 80:80
+    volumes:
+      - ./src/public:/var/www/html
+      - ./src:/var/www
+
 volumes:
   pgdata:
+

@@ -2,7 +2,7 @@
 //todo закрыть доступ к файлу через web
 return [
     'db' => [
-        'host' => 'localhost',
+        'host' => 'postgres',
         'dbname' => 'profit',
         'username' => 'profit',
         'password' => 'profit'

@@ -19,4 +19,4 @@ $article = $this->article;
         <i><?php echo $article->author->pseudonym; ?></i>
     <?php endif; ?>
 </p>
-<a href="/index.php">К списку новостей</a>
+<a href="/">К списку новостей</a>

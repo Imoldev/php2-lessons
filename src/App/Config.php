@@ -1,12 +1,10 @@
 <?php
 
 
-namespace App;
-
 
 class Config
 {
-    protected const CONFIG_FILE = __DIR__. '/../config/config.php';
+    protected const CONFIG_FILE = __DIR__ . '/config/config.php';
 
     public $data;
 

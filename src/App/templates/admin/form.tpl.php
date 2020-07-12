@@ -4,8 +4,7 @@ use Models\Article;
 /** @var Article $article */
 $article = $this->article;
 ?>
-<form action="" method="post">
-    <input type="hidden" name="action" value="<?php echo $this->forward; ?>">
+<form action="/admin/article/save" method="post">
     <input type="hidden" name="id" value="<?php echo $article->id ?? ''; ?>">
     <label for="title">Заголовок</label>
     <br>
@@ -21,6 +20,6 @@ $article = $this->article;
     <br><br>
     <button type="submit">Отправить</button>
     <?php if (isset($article)): ?>
-    <a href="/admin/?action=edit&id=<?php echo $article->id ?>">Сбросить</a>
+    <a href="/admin/article/edit?id=<?php echo $article->id ?>">Сбросить</a>
     <?php endif; ?>
 </form>

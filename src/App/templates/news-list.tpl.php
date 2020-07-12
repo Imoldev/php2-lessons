@@ -4,7 +4,7 @@
     use Models\Article;
 
     /** @var Article $item */
-    foreach ($this->newsList as $item): ?>
+    foreach ($this->articles as $item): ?>
         <li>
             <h3><?php echo $item->title; ?></h3>
             <div> <?php echo $item->date; ?> </div>
@@ -13,7 +13,7 @@
                 <p><i> <?php echo $item->author->pseudonym; ?> </i></p>
             <?php endif; ?>
             <br>
-            <a href="/article.php?id=<?= $item->id ?>">Читать подробно</a>
+            <a href="/article/detail?id=<?php echo $item->id; ?>">Читать подробно</a>
             <hr>
         </li>
     <?php endforeach; ?>

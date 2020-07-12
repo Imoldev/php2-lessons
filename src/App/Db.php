@@ -1,6 +1,5 @@
 <?php
 
-use App\Config;
 
 class Db
 {
